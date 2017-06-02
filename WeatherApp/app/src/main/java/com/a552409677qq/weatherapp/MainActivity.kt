@@ -6,8 +6,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.async
 //为了可以使用anko提供的find方法
 import org.jetbrains.anko.find
+import org.jetbrains.anko.longToast
+import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,5 +32,11 @@ class MainActivity : AppCompatActivity() {
         forecastList.layoutManager = LinearLayoutManager(this)
         forecastList.adapter = ForecastListAdapter(items)
 //        message.text = "hello kotlin"
+        val url = "http://www.weather.com.cn/data/sk/101010100.html"
+        async {
+            uiThread { longToast("start Requset") }
+            Request(url).run()
+            uiThread { longToast("Request Success") }
+        }
     }
 }
