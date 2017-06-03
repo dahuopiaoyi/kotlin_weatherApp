@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.TextView
+import com.a552409677qq.weatherapp.domain.RequestForecastCommand
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.async
 //为了可以使用anko提供的find方法
@@ -14,15 +15,15 @@ import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity() {
 
-    private val items = listOf(
-            "Mon 6/23 - Sunny - 31/17",
-            "Tue 6/24 - Foggy - 21/8",
-            "Mon 6/23 - Sunny - 31/17",
-            "Tue 6/24 - Foggy - 21/8",
-            "Mon 6/23 - Sunny - 31/17",
-            "Tue 6/24 - Foggy - 21/8",
-            "Mon 6/23 - Sunny - 31/17"
-    )
+//    private val items = listOf(
+//            "Mon 6/23 - Sunny - 31/17",
+//            "Tue 6/24 - Foggy - 21/8",
+//            "Mon 6/23 - Sunny - 31/17",
+//            "Tue 6/24 - Foggy - 21/8",
+//            "Mon 6/23 - Sunny - 31/17",
+//            "Tue 6/24 - Foggy - 21/8",
+//            "Mon 6/23 - Sunny - 31/17"
+//    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,12 +31,19 @@ class MainActivity : AppCompatActivity() {
         val forecastList: RecyclerView = find(R.id.forecast_list)
 //        val forecastList = findViewById(R.id.forecast_list) as RecyclerView
         forecastList.layoutManager = LinearLayoutManager(this)
-        forecastList.adapter = ForecastListAdapter(items)
+//        forecastList.adapter = ForecastListAdapter(forecastList)
 //        message.text = "hello kotlin"
-        val url = "http://www.weather.com.cn/data/sk/101010100.html"
+//        val url = "http://www.weather.com.cn/data/sk/101010100.html"
         async {
             uiThread { longToast("start Requset") }
-            Request(url).run()
+            val result =
+                RequestForecastCommand("Beijing,CN").execute()
+//                RequestForecastCommand("94043").execute()
+            uiThread {
+                forecastList.adapter = ForecastListAdapter(result)
+            }
+
+//            Request(url).run()
             uiThread { longToast("Request Success") }
         }
     }
