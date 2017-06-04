@@ -7,6 +7,7 @@ import java.net.URL
 
 /**
  * Created by loudj on 2017/6/2.
+ * 用来请求openweather的天气数据，并将json数据转化为内部数据
  */
 //public class Request(val url: String){
 //    public fun run() {

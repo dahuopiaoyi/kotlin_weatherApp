@@ -4,6 +4,7 @@ import java.text.FieldPosition
 
 /**
  * Created by 55240 on 2017/6/3.
+ * 将json数据解析为更友善的数据格式，用于界面显示
  */
 public interface Command<T> {
     fun execute(): T
@@ -17,4 +18,4 @@ data class ForecastList(val city: String, val country: String,
 }
 
 data class Forecast(val data: String, val description: String,
-                    val high: Int, val low: Int)
+                    val high: Int, val low: Int, val iconUrl: String)

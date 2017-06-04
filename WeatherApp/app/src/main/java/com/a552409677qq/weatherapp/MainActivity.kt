@@ -5,13 +5,11 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.TextView
+import com.a552409677qq.weatherapp.domain.Forecast
 import com.a552409677qq.weatherapp.domain.RequestForecastCommand
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.async
+import org.jetbrains.anko.*
 //为了可以使用anko提供的find方法
-import org.jetbrains.anko.find
-import org.jetbrains.anko.longToast
-import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,7 +38,12 @@ class MainActivity : AppCompatActivity() {
                 RequestForecastCommand("Beijing,CN").execute()
 //                RequestForecastCommand("94043").execute()
             uiThread {
-                forecastList.adapter = ForecastListAdapter(result)
+                forecastList.adapter = ForecastListAdapter(result,
+                        object: ForecastListAdapter.OnItemClickListener{
+                            override fun invoke(forecast: Forecast) {
+                                toast(forecast.data)
+                            }
+                        })
             }
 
 //            Request(url).run()

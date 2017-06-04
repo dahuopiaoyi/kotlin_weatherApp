@@ -5,6 +5,7 @@ import java.net.URL
 
 /**
  * Created by 55240 on 2017/6/3.
+ * json对应的数据类
  */
 data class ForecastResult(val city: City, val list: List<Forecast>)
 
