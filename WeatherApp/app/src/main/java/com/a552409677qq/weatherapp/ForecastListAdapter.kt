@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.a552409677qq.weatherapp.GPSLocation.MyLocationManager
 import com.a552409677qq.weatherapp.domain.ForecastList
 import com.a552409677qq.weatherapp.domain.Forecast
 import com.squareup.picasso.Picasso
@@ -44,12 +45,14 @@ class ForecastListAdapter(val weekForecast: ForecastList,
 //    class ViewHolder(val textView: TextView): RecyclerView.ViewHolder(textView)
     class ViewHolder(view: View, val itemClick: OnItemClickListener):
         RecyclerView.ViewHolder(view) {
+    private val locationView: TextView
     private val iconView: ImageView
     private val dateView: TextView
     private val descriptionView: TextView
     private val maxTemperatuerView: TextView
     private val minTemperatureView: TextView
     init {
+        locationView = view.find(R.id.location)
         iconView = view.find(R.id.icon)
         dateView = view.find(R.id.date)
         descriptionView = view.find(R.id.description)
@@ -58,6 +61,7 @@ class ForecastListAdapter(val weekForecast: ForecastList,
     }
     fun bindForecast(forecast: Forecast) {
         with(forecast) {
+            locationView.text = MyLocationManager(itemView.context).myLocation().toString()
             Picasso.with(itemView.context).load(iconUrl).into(iconView)
             dateView.text = data
             descriptionView.text = description
