@@ -1,5 +1,6 @@
 package com.a552409677qq.weatherapp
 
+import android.app.Activity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -21,11 +22,12 @@ import org.w3c.dom.Text
  */
 
 class ForecastListAdapter(val weekForecast: ForecastList,
-                          val itemClick: ForecastListAdapter.OnItemClickListener):
+                        val itemClick: ForecastListAdapter.OnItemClickListener):
         RecyclerView.Adapter<ForecastListAdapter.ViewHolder>(){
     public interface OnItemClickListener {
         operator fun invoke(forecast: Forecast)
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_forecast,
                 parent, false)
@@ -34,25 +36,18 @@ class ForecastListAdapter(val weekForecast: ForecastList,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindForecast(weekForecast[position])
-     //   holder.textView.text =  "${weekForecast.city}"
-//        with(weekForecast[position]) {
-//            holder.textView.text = "${holder.textView.text} - $data - $description - $high/$low"
-//        }
     }
 
     override fun getItemCount(): Int = weekForecast.size()
 
-//    class ViewHolder(val textView: TextView): RecyclerView.ViewHolder(textView)
     class ViewHolder(view: View, val itemClick: OnItemClickListener):
         RecyclerView.ViewHolder(view) {
-    private val locationView: TextView
     private val iconView: ImageView
     private val dateView: TextView
     private val descriptionView: TextView
     private val maxTemperatuerView: TextView
     private val minTemperatureView: TextView
     init {
-        locationView = view.find(R.id.location)
         iconView = view.find(R.id.icon)
         dateView = view.find(R.id.date)
         descriptionView = view.find(R.id.description)
@@ -61,7 +56,6 @@ class ForecastListAdapter(val weekForecast: ForecastList,
     }
     fun bindForecast(forecast: Forecast) {
         with(forecast) {
-            locationView.text = MyLocationManager(itemView.context).myLocation().toString()
             Picasso.with(itemView.context).load(iconUrl).into(iconView)
             dateView.text = data
             descriptionView.text = description
