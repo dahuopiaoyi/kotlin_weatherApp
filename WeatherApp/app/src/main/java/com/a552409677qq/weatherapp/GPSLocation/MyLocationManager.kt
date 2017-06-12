@@ -23,7 +23,7 @@ import java.util.jar.Manifest
 //LocationListener 接口的实现，用于监听位置变化
 class MyLocationListener(val textView: TextView): LocationListener {
     override fun onStatusChanged(p0: String?, p1: Int, p2: Bundle?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onLocationChanged(p0: Location?) {
@@ -44,7 +44,6 @@ class MyLocationListener(val textView: TextView): LocationListener {
 class MyLocationManager(val context: Context, val textView: TextView) {
     val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
     public fun setLocation(){
-        var location: Location? = null
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val hasLocationPermission = context.checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION)
             if (hasLocationPermission != PackageManager.PERMISSION_DENIED) {

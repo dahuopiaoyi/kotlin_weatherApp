@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val forecastList: RecyclerView = find(R.id.forecast_list)
-        forecastList.addOnScrollListener()
+//        forecastList.addOnScrollListener()
 
         forecastList.layoutManager = LinearLayoutManager(this)
         async {
