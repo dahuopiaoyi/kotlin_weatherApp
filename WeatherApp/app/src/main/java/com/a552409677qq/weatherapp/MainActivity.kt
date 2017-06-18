@@ -58,12 +58,15 @@ class MainActivity : AppCompatActivity() {
             val result =
                 RequestForecastCommand("Beijing,CN").execute()
             uiThread {
-                forecastList.adapter = ForecastListAdapter(result,
-                        object: ForecastListAdapter.OnItemClickListener{
-                            override fun invoke(forecast: Forecast) {
-                                toast(forecast.data)
-                            }
-                        })
+                //使用ForecastListAdapter
+//                forecastList.adapter = ForecastListAdapter(result,
+//                        object: ForecastListAdapter.OnItemClickListener{
+//                            override fun invoke(forecast: Forecast) {
+//                                toast(forecast.data)
+//                            }
+//                        })
+                //使用ForcastListAdapterWithLambdas
+                forecastList.adapter = ForecastListAdapterWithLambdas(result) { toast(it.data) }
             }
             uiThread { longToast("Request Success") }
         }

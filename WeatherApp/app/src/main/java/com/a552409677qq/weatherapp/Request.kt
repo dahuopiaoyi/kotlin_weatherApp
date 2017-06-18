@@ -15,7 +15,7 @@ import java.net.URL
 //        Log.d(javaClass.simpleName, forecastJsonStr)
 //    }
 //}
-public class ForecastRequest(val zipCode: String) {
+public class ForecastRequest(private val zipCode: String) {
     companion object {
         private val APP_ID = "15646a06818f61f7b8d7823ca833e1ce"
         private val URL = "http://api.openweathermap.org/data/2.5/" +
