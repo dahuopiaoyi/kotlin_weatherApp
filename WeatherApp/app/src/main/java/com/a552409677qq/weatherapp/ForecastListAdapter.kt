@@ -14,6 +14,7 @@ import com.squareup.picasso.Picasso
 //为了可以使用anko提供的find方法
 import org.jetbrains.anko.find
 import kotlinx.android.synthetic.main.item_forecast.*
+import kotlinx.android.synthetic.main.item_forecast.view.*
 import org.w3c.dom.Text
 
 /**
@@ -42,27 +43,39 @@ class ForecastListAdapter(val weekForecast: ForecastList,
 
     class ViewHolder(view: View, val itemClick: OnItemClickListener):
         RecyclerView.ViewHolder(view) {
-    private val iconView: ImageView
-    private val dateView: TextView
-    private val descriptionView: TextView
-    private val maxTemperatuerView: TextView
-    private val minTemperatureView: TextView
-    init {
-        iconView = view.find(R.id.icon)
-        dateView = view.find(R.id.date)
-        descriptionView = view.find(R.id.description)
-        maxTemperatuerView = view.find(R.id.maxTemperature)
-        minTemperatureView = view.find(R.id.minTemperature)
-    }
-    fun bindForecast(forecast: Forecast) {
+//    private val iconView: ImageView
+//    private val dateView: TextView
+//    private val descriptionView: TextView
+//    private val maxTemperatuerView: TextView
+//    private val minTemperatureView: TextView
+//    init {
+//        iconView = view.find(R.id.icon)
+//        dateView = view.find(R.id.date)
+//        descriptionView = view.find(R.id.description)
+//        maxTemperatuerView = view.find(R.id.maxTemperature)
+//        minTemperatureView = view.find(R.id.minTemperature)
+//    }
+//    fun bindForecast(forecast: Forecast) {
+//        with(forecast) {
+//            Picasso.with(itemView.context).load(iconUrl).into(iconView)
+//            dateView.text = data
+//            descriptionView.text = description
+//            maxTemperatuerView.text = "${high.toString()}"
+//            minTemperatureView.text = "${low.toString()}"
+//            itemView.setOnClickListener{ itemClick(forecast) }
+//        }
+//    }
+        //使用 kotlin-android-Extensions直接访问XML中的views
+        fun bindForecast(forecast: Forecast) {
         with(forecast) {
-            Picasso.with(itemView.context).load(iconUrl).into(iconView)
-            dateView.text = data
-            descriptionView.text = description
-            maxTemperatuerView.text = "${high.toString()}"
-            minTemperatureView.text = "${low.toString()}"
-            itemView.setOnClickListener{ itemClick(forecast) }
+            Picasso.with(itemView.context).load(iconUrl).into(itemView.icon)
+            itemView.date.text = data
+            itemView.description.text = description
+            itemView.maxTemperature.text = "${high.toString()}"
+            itemView.minTemperature.text = "${low.toString()}"
+            itemView.setOnClickListener { itemClick(forecast) }
         }
     }
+
 }
 }
