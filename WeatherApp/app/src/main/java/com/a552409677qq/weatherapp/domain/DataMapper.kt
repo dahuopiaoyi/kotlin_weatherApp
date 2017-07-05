@@ -11,7 +11,7 @@ import com.a552409677qq.weatherapp.domain.Forecast as ModelForecast
  */
 public class ForecastDataMapper{
     fun convertFromDataModel(forecast: ForecastResult): ForecastList {
-        return ForecastList(forecast.city.name, forecast.city.country,
+        return ForecastList(forecast.city.id, forecast.city.name, forecast.city.country,
                 convertForecastListToDomain(forecast.list))
     }
     private fun convertForecastListToDomain(list: List<Forecast>):

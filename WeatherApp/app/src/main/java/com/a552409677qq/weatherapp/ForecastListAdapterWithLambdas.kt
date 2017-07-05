@@ -49,7 +49,7 @@ class ForecastListAdapterWithLambdas(val weekForecast: ForecastList,
         fun bindForecast(forecast: com.a552409677qq.weatherapp.domain.Forecast) {
             with(forecast) {
                 Picasso.with(itemView.context).load(iconUrl).into(iconView)
-                dateView.text = data
+                dateView.text = data.toString()
                 descriptionView.text = description
                 maxTemperatuerView.text = "${high.toString()}"
                 minTemperatureView.text = "${low.toString()}"

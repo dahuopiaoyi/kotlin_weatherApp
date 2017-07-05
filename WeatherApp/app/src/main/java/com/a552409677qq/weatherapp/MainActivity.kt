@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
 //                            }
 //                        })
                 //使用ForcastListAdapterWithLambdas
-                forecastList.adapter = ForecastListAdapterWithLambdas(result) { toast(it.data) }
+                forecastList.adapter = ForecastListAdapterWithLambdas(result) { toast(it.data.toString()) }
             }
             uiThread { longToast("Request Success") }
         }
