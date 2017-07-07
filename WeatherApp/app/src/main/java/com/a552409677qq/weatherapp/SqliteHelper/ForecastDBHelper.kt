@@ -43,7 +43,7 @@ class ForecastDBHelper(ctx: Context = App.instance): ManagedSQLiteOpenHelper(App
 
         db.createTable(DayForecastTable.NAME, true,
                 DayForecastTable.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
-                DayForecastTable.DATE to INTEGER,
+                DayForecastTable.DATE to TEXT,
                 DayForecastTable.DESCRIPTION to TEXT,
                 DayForecastTable.HIGH to INTEGER,
                 DayForecastTable.LOW to INTEGER,

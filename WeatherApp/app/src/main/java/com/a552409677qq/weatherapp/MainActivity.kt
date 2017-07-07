@@ -34,17 +34,23 @@ class MainActivity : AppCompatActivity() {
         myLocationListener = MyLocationListener(textView)
 
         //获取位置权限
+        //这里进行版本判断是因为M版开始不是在安装的时候获取权限了
+        //是在使用的时候才会询问
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            //判断当前是否获得了位置权限，如果没有就询问用户
             hasLocationPermission = checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
             if (hasLocationPermission != PackageManager.PERMISSION_GRANTED) {
+                //获取列表中的权限
                 requestPermissions(arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION),
                         LOCATIONPERMISSION_CODE)
             }
             else {
+                //如果有权限就显示位置信息
                myLocationManager.setLocation()
             }
         }
         else {
+            //M版之前在安装APP的时候已经获取了权限，直接显示位置信息
             myLocationManager.setLocation()
         }
 
